@@ -1,0 +1,49 @@
+#app {
+    font-family: Palatino, serif !important;
+    padding: 25px;
+}
+
+.top-bar {
+    /* background-color: red; */
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+#logo-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 5px;
+    text-decoration: none;
+    color: black;
+}
+
+#petconnect-title {
+    font-weight: 700;
+    font-size: 25px;
+}
+
+#petconnect-logo {
+    height: 30px;
+    padding: 5px;
+}
+
+#links {
+    width: 80%;
+    /* background-color: orange; */
+    display: flex;
+    justify-content: space-between;
+    padding-left: 20%;
+    padding-right: 20%;
+}
+
+.link {
+    /* background-color: blue; */
+    text-decoration: none;
+}
+
+#profile-dropdown {
+    background-color: yellow;
+}
