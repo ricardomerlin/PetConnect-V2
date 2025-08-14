@@ -1,5 +1,5 @@
 #app {
-    font-family: Palatino, serif !important;
+    font-family: 'Times New Roman', Times, serif, !important;
     padding: 25px;
 }
 
@@ -9,6 +9,8 @@
     text-align: center;
     justify-content: center;
     align-items: center;
+    border: 2px solid blue;
+    margin-bottom: 30px;
 }
 
 #logo-container {

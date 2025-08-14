@@ -5,7 +5,7 @@ import AnimalFeed from './AnimalFeed';
 import Profile from './Profile';
 import Home from './Home';
 
-import './styles/App.css';
+import './styles/app.css';
 
 function App() {
   const [profileId, setProfileId] = useState(null);
@@ -34,7 +34,7 @@ function App() {
               <h2>PetConnect</h2>
               <Link className='side-link' to="/animals">Available Pets</Link>
               <Link className='side-link' to="/profile">My Profile</Link>
-              <Link className='side-link' to="/foster">Foster</Link>
+              <Link className='side-link' to="/foster">Map</Link>
             </div>
           </div>
         }
@@ -46,6 +46,8 @@ function App() {
           {isTop ?
           <div id='links'>
             <Link className='link' style={{opacity: isTop ? 1 : 0, marginLeft: '10px'}} to="/animals">Adoptable Animals</Link>
+            <Link className='link' style={{opacity: isTop ? 1 : 0, marginLeft: '10px'}} to="/">Placeholder</Link>
+            <Link className='link' style={{opacity: isTop ? 1 : 0, marginLeft: '10px'}} to="/">Placeholder 2</Link>
           </div>
           :
           null
@@ -53,12 +55,12 @@ function App() {
           {profile ?
           <>
             <div onMouseEnter={() => setDropdownOpen(true)}>Welcome Ricardo</div>
-            {dropdownOpen && <div className="dropdown" onMouseLeave={() => setDropdownOpen(false)}>Profile Menu
+            {/* {dropdownOpen && <div className="dropdown" onMouseLeave={() => setDropdownOpen(false)}>Profile Menu
             <ul>
                 <Link className='dropdown-link' to="/profile">My Profile</Link>
                 <Link className='dropdown-link' to="/map">My saved pets</Link>
               </ul>
-            </div>}
+            </div>} */}
           </>
           :
           <Link className='link' to="/login">Login</Link>
@@ -68,7 +70,7 @@ function App() {
           <Route path="/login" element={<Profile />} />
           <Route path="/animals" element={<AnimalFeed  />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/home" element={<Home />} />
+          <Route path="/" element={<Home />} />
         </Routes>
       </div>
     </Router>
