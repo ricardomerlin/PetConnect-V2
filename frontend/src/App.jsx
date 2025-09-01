@@ -4,12 +4,13 @@ import { BrowserRouter as Router, Route, Link, Routes, useNavigate, useRoutes } 
 import AnimalFeed from './AnimalFeed';
 import Profile from './Profile';
 import Home from './Home';
+import LoginPage from './login';
 
 import './styles/app.css';
 
 function App() {
   const [profileId, setProfileId] = useState(null);
-  const [profile, setProfile] = useState("null");
+  const [profile, setProfile] = useState(null);
   const [isTop, setIsTop] = useState(true);
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
@@ -45,9 +46,17 @@ function App() {
           </Link>
           {isTop ?
           <div id='links'>
-            <Link className='link' style={{opacity: isTop ? 1 : 0, marginLeft: '10px'}} to="/animals">Adoptable Animals</Link>
-            <Link className='link' style={{opacity: isTop ? 1 : 0, marginLeft: '10px'}} to="/">Placeholder</Link>
-            <Link className='link' style={{opacity: isTop ? 1 : 0, marginLeft: '10px'}} to="/">Placeholder 2</Link>
+            <Link className='link' style={{opacity: isTop ? 1 : 0, marginLeft: '10px'}} to="/animals">Adopt</Link>
+            <Link className='link' style={{opacity: isTop ? 1 : 0, marginLeft: '10px'}} to="/">How to Adopt</Link>
+            <Link className='link' style={{opacity: isTop ? 1 : 0, marginLeft: '10px'}} to="/">About me</Link>
+            <Link className='link' style={{opacity: isTop ? 1 : 0, marginLeft: '10px'}} to="/">Additional Resources</Link>
+            {profile
+            ? 
+            <>
+            <Link className='link' style={{opacity: isTop ? 1 : 0, marginLeft: '10px'}} to="/profile">Saved Pets</Link>
+            </>
+            : null
+            }
           </div>
           :
           null
@@ -67,10 +76,10 @@ function App() {
           }
         </nav>
         <Routes>
-          <Route path="/login" element={<Profile />} />
           <Route path="/animals" element={<AnimalFeed  />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/" element={<Home />} />
+          <Route path="/login" element={<LoginPage />} />
         </Routes>
       </div>
     </Router>
