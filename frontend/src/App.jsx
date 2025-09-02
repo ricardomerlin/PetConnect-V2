@@ -24,6 +24,29 @@ function App() {
     }
   },[])
 
+  useEffect(() => {
+    const getAnimals = async () => {
+      try {
+        const response = await fetch('mongodb://127.0.0.1:27017/api/profile', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            // Include auth token if needed
+          },
+        });
+        if (response.ok) {
+          const data = await response.json();
+          setProfile(data);
+          console.log('Profile data fetched successfully:', data);
+        } else {
+          console.error('Failed to fetch profile data');
+        }
+      } catch (error) {
+        console.error('Error fetching profile data:', error);
+      }
+    }
+  })
+
 
 
   return (
