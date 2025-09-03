@@ -1,5 +1,7 @@
+// import { ConnectionStates } from 'mongoose';
 import React from 'react'
 import { useState } from "react";
+
 
 function LoginPage() {
   const [formData, setFormData] = useState({
@@ -17,7 +19,44 @@ function LoginPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Logging in with:", formData);
+    getUserByEmail(formData.email);
+    console.log("Submitted data:", formData);
   };
+
+
+  const getUserByEmail = async (email) => {
+    console.log(email)
+    try {
+      const url = `http://127.0.0.1:5000/api/users/email/${email}`; // Backend API endpoint
+      console.log("Fetching user with URL:", url); // Log the full URL
+  
+      const response = await fetch(url, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+  
+      if (!response.ok) {
+        throw new Error("User not found");
+      }
+  
+      const user = await response.json();
+      console.log("User data:", user);
+      handleLoginAttempt(user);
+      return user;
+    } catch (error) {
+      console.error("Error fetching user:", error.message);
+    }
+  };
+
+  const handleLoginAttempt = (user) => {
+    console.log("Login successful for user:", user);
+    if 
+    localStorage.setItem('petconnect_user', JSON.stringify(user));
+    console.log("User ID stored in localStorage:", user._id);
+  }
+  
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">

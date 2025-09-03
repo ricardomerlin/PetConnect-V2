@@ -19,10 +19,19 @@ function App() {
     const user = localStorage.getItem('petconnect_user')
     if (user) {
       console.log('✅ THERE IS A USER LOGGED INTO PETCONNECT')
+      setProfileId(user.id)
+      setProfile(user)
     } else {
       console.log('❌ NO USER WAS FOUND')
     }
   },[])
+
+  const logoutUser = () => {
+    localStorage.removeItem('petconnect_user');
+    setProfileId(null);
+    setProfile(null);
+    console.log('User logged out');
+  }
 
   useEffect(() => {
     const getAnimals = async () => {
@@ -87,12 +96,13 @@ function App() {
           {profile ?
           <>
             <div onMouseEnter={() => setDropdownOpen(true)}>Welcome Ricardo</div>
-            {/* {dropdownOpen && <div className="dropdown" onMouseLeave={() => setDropdownOpen(false)}>Profile Menu
+            {dropdownOpen && <div className="dropdown" onMouseLeave={() => setDropdownOpen(false)}>Profile Menu
             <ul>
                 <Link className='dropdown-link' to="/profile">My Profile</Link>
                 <Link className='dropdown-link' to="/map">My saved pets</Link>
+                <li className='dropdown-link' onClick={logoutUser}>Logout</li>
               </ul>
-            </div>} */}
+            </div>}
           </>
           :
           <Link className='link' to="/login">Login</Link>

@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
+const bcrypt = require("bcryptjs"); // Import bcrypt
 const User = require("../models/User");
 const Animal = require("../models/Animal");
 
@@ -13,11 +14,14 @@ const seedData = async () => {
   await User.deleteMany();
   await Animal.deleteMany();
 
+  // Hash the password
+  const hashedPassword = await bcrypt.hash("123456", 10); // Hash the password with a salt round of 10
+
   // Seed one sample user
   await User.create({
     name: "Admin",
     email: "admin@test.com",
-    password: "123456",
+    password: hashedPassword, // Use the hashed password
     savedAnimals: ["68b6218c00d1c837dbe21048", "68b6218c00d1c837dbe21049"]
   });
 

@@ -1,15 +1,15 @@
 [
   {
-    "_id": "68b6218c00d1c837dbe21046",
+    "_id": "68b7cb644e322e03d48c8666",
     "name": "Admin",
     "email": "admin@test.com",
-    "password": "123456",
+    "password": "$2b$10$v06zHQRR2NCBi3DqRazt3e/NKlwCq4tP0rvVkKEntI8pFuL84hLmS",
     "savedAnimals": [
-      "68b612765698041c56170696",
-      "68b612765698041c56170697"
+      "68b6218c00d1c837dbe21048",
+      "68b6218c00d1c837dbe21049"
     ],
-    "createdAt": "2025-09-01T22:43:24.538Z",
-    "updatedAt": "2025-09-01T22:43:24.538Z",
+    "createdAt": "2025-09-03T05:00:20.042Z",
+    "updatedAt": "2025-09-03T05:00:20.042Z",
     "__v": 0
   }
 ]
