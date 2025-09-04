@@ -3,7 +3,7 @@ import React from 'react'
 import { useState } from "react";
 
 
-function LoginPage() {
+function LoginPage({checkUserLoggedIn}) {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -50,12 +50,32 @@ function LoginPage() {
     }
   };
 
-  const handleLoginAttempt = (user) => {
-    console.log("Login successful for user:", user);
-    if 
-    localStorage.setItem('petconnect_user', JSON.stringify(user));
-    console.log("User ID stored in localStorage:", user._id);
-  }
+  const handleLoginAttempt = async () => {
+    try {
+      const response = await fetch("http://127.0.0.1:5000/api/users/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+  
+      if (!response.ok) {
+        const err = await response.json();
+        alert(err.message || "Login failed");
+        return;
+      }
+  
+      const user = await response.json();
+  
+      // Save user info to localStorage (without password)
+      localStorage.setItem("petconnect_user", JSON.stringify(user));
+      console.log("User logged in successfully:", user);
+    } catch (error) {
+      console.error("Login error:", error.message);
+      alert("Something went wrong. Please try again.");
+    }
+    checkUserLoggedIn();
+  };
+  
   
 
   return (

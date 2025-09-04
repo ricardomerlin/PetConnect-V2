@@ -14,8 +14,14 @@ function App() {
   const [isTop, setIsTop] = useState(true);
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
+  const navigate = useNavigate();
+
 
   useEffect(() => {
+    checkUserLoggedIn()
+  },[])
+
+  const checkUserLoggedIn = () => {
     const user = localStorage.getItem('petconnect_user')
     if (user) {
       console.log('✅ THERE IS A USER LOGGED INTO PETCONNECT')
@@ -24,12 +30,13 @@ function App() {
     } else {
       console.log('❌ NO USER WAS FOUND')
     }
-  },[])
+  }
 
   const logoutUser = () => {
     localStorage.removeItem('petconnect_user');
     setProfileId(null);
     setProfile(null);
+    // checkUserLoggedIn();
     console.log('User logged out');
   }
 
@@ -112,7 +119,7 @@ function App() {
           <Route path="/animals" element={<AnimalFeed  />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/" element={<Home />} />
-          <Route path="/login" element={<LoginPage />} />
+          {profile ? null : <Route path="/login" element={<LoginPage checkUserLoggedIn={checkUserLoggedIn}/>} /> }
         </Routes>
       </div>
     </Router>
