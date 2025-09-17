@@ -7,19 +7,20 @@ import Home from './Home';
 import LoginPage from './login';
 
 import './styles/app.css';
+// import { exampleEndpoint } from '../../updated_backend/controllers/animalController';
 
 function App() {
   const [profileId, setProfileId] = useState(null);
   const [profile, setProfile] = useState(null);
   const [isTop, setIsTop] = useState(true);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-
-  const navigate = useNavigate();
-
+  const [availableAnimals, setAvailableAnimals] = useState([]);
 
   useEffect(() => {
     checkUserLoggedIn()
+    getAllAnimals()
   },[])
+  
 
   const checkUserLoggedIn = () => {
     const user = localStorage.getItem('petconnect_user')
@@ -32,6 +33,27 @@ function App() {
     }
   }
 
+  const getAllAnimals = async () => {
+    try {
+      const response = await fetch('http://127.0.0.1:3001/api/animals', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          },
+      });
+      if (response.ok) {
+        const data = await response.json();
+        setAvailableAnimals(data);
+        console.log('Available animals fetched successfully:', data);
+      }
+      else {
+        console.error('Failed to fetch available animals');
+      }
+    } catch (error) {
+      console.error('Error fetching available animals:', error);
+    }
+  }
+
   const logoutUser = () => {
     localStorage.removeItem('petconnect_user');
     setProfileId(null);
@@ -39,31 +61,6 @@ function App() {
     // checkUserLoggedIn();
     console.log('User logged out');
   }
-
-  useEffect(() => {
-    const getAnimals = async () => {
-      try {
-        const response = await fetch('mongodb://127.0.0.1:27017/api/profile', {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            // Include auth token if needed
-          },
-        });
-        if (response.ok) {
-          const data = await response.json();
-          setProfile(data);
-          console.log('Profile data fetched successfully:', data);
-        } else {
-          console.error('Failed to fetch profile data');
-        }
-      } catch (error) {
-        console.error('Error fetching profile data:', error);
-      }
-    }
-  })
-
-
 
   return (
     <Router>
